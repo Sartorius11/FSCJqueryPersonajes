@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Personaje</title>
+
+</head>
+
+<body>
+
+    <div id="menu"></div>
+
+       
+
+
+        <table id="modificartabla" class="table border w-75 mx-auto align-middle">
+            <thead>
+            </thead>
+            <tbody>
+                <td class="modificarPersonaje"></td>
+                <td class="modificarSerie"></td>
+            </tbody>
+        </table>
+
+
+
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script>
+        var urlSeries = "https://apiseriespersonajes2023.azurewebsites.net/";
+
+        $(document).ready(function () {
+            $("#menu").load("menu.html");
+            loadModificar();
+        })
+
+        const parameters = new URLSearchParams(window.location.search);
+
+        function loadModificar() {
+            var request = "/api/Apuestas/";
+            $.ajax({
+                'url': urlSeries + request,
+                'method': "PUT",
+                'dataType': 'JSON',
+
+                success: function (data) {
+                    $.each(data, function (index, modificar) {
+
+                       var form onclick (){
+                            const modificar = () => {
+                            const valor = $("#modificarPersonaje :selected").val(modificar.idPersonaje),
+                                texto = $("#modificarSerie :selected").text(modificar.idSerie);
+                            
+                        };
+                        }
+                        
+
+
+                        
+                            //se que esta mal  
+                        modificar.append('modificarPersonaje','modificarSerie')
+                        $("#modificartabla tbody").append(tr);
+                    });
+                    $("#btnVolver").attr("href", "home.html");
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

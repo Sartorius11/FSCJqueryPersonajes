@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Personaje</title>
+
+</head>
+<body>
+
+    <div id="menu"></div>
+        <h1>Nuevo Personaje</h1>
+            <!-- no encuentro el error, no se como poner aqui los datos  -->
+            <table id="tableBets" class="table border w-75 mx-auto align-middle">
+                <thead>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+
+    <script src="../js/jquery-3.6.1.min.js"></script>
+    <script>
+
+        // cargo la url para coger los datos de la api
+         var urlSeries = "https://apiseriespersonajes2023.azurewebsites.net/";
+
+
+         //carga el scrip con la funcion loadNuevoPersonajes()
+        $(document).ready(function(){
+            $("#menu").load("menu.html");
+            loadNuevoPersonaje();
+        })
+
+
+        const parameters = new URLSearchParams(window.location.search);
+        function loadNuevoPersonaje() {
+
+            var request = "api/Personajes";
+
+
+            $.ajax({
+                
+                'url' : urlSeries + request,
+                'method' : "POST",
+                'dataType' : 'JSON',
+                success : function(data) {
+
+                    $.each(data, function(index, personaje) { 
+                        $("#btnCreate").attr('href',"nuevoPersonaje.html?accion=1");
+                        
+                        var tr = $("<tr>", { 'class' : "text-center" });
+
+                        var tdNombre = $("<td>", { 'text' : personaje.Nombre });
+                        var tdImagen = $("<td>", { 'text' : personaje.imagen });
+                        var tdSerie = $("<td>", { 'text' : personaje.idSerie });
+                        var tdInsertar = $("<td>");
+                        tr.append(tdNombre, tdImagen, tdSerie,tdInsertar );
+                        $("#tablePersonaje tbody").append(tr);
+                    });
+                    
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
